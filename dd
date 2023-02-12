@@ -1,0 +1,1737 @@
+import java.awt.event.*;
+import javax.swing.event.*;
+import javax.swing.*;
+import java.util.ArrayList;
+import java.util.Random;
+
+class JPanel001 extends JPanel {//게임 시작 화면 패널
+	private JAVA타자 win;
+	//버튼 이미지 
+	private ImageIcon Backgroundimage = new ImageIcon("Background.jpg");
+	private JLabel Background = new JLabel(Backgroundimage);
+	private ImageIcon b1image1 = new ImageIcon("b1.PNG");
+	private ImageIcon b1image2 = new ImageIcon("b2.PNG");
+	private ImageIcon b2image1 = new ImageIcon("b3.PNG");
+	private ImageIcon b2image2 = new ImageIcon("b4.PNG");
+	private ImageIcon b3image1 = new ImageIcon("b5.PNG");
+	private ImageIcon b3image2 = new ImageIcon("b6.PNG");
+	private ImageIcon b4image1 = new ImageIcon("b7.PNG");
+	private ImageIcon b4image2 = new ImageIcon("b8.PNG");
+	private ImageIcon b5image1 = new ImageIcon("b9.PNG");
+	private ImageIcon b5image2 = new ImageIcon("b10.PNG");
+
+	public JPanel001(JAVA타자 win) {
+		this.win = win;
+
+		setLayout(null);
+		//버튼 생성
+		JButton b1 = new JButton(b1image1);
+		b1.setRolloverIcon(b1image2);
+		b1.setBounds(80, 250, 200, 80);
+		b1.setBorderPainted(false);
+		b1.setContentAreaFilled(false);
+		b1.setFocusPainted(false);
+		Background.add(b1);
+
+		JButton b2 = new JButton(b2image1);
+		b2.setRolloverIcon(b2image2);
+		b2.setBounds(80, 390, 200, 80);
+		b2.setBorderPainted(false);
+		b2.setContentAreaFilled(false);
+		b2.setFocusPainted(false);
+		Background.add(b2);
+
+		JButton b3 = new JButton(b3image1);
+		b3.setRolloverIcon(b3image2);
+		b3.setBounds(1000, 250, 200, 80);
+		b3.setBorderPainted(false);
+		b3.setContentAreaFilled(false);
+		b3.setFocusPainted(false);
+		Background.add(b3);
+
+		JButton b4 = new JButton(b4image1);
+		b4.setRolloverIcon(b4image2);
+		b4.setBounds(1000, 390, 200, 80);
+		b4.setBorderPainted(false);
+		b4.setContentAreaFilled(false);
+		b4.setFocusPainted(false);
+		Background.add(b4);
+
+		JButton b5 = new JButton(b5image1);
+		b5.setRolloverIcon(b5image2);
+		b5.setBounds(550, 500, 200, 80);
+		b5.setBorderPainted(false);
+		b5.setContentAreaFilled(false);
+		b5.setFocusPainted(false);
+		b5.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				System.exit(0);
+			}
+		});
+		Background.add(b5);
+		Background.setSize(1280, 720);
+		add(Background);
+
+		b1.addActionListener(new b1());
+		b2.addActionListener(new b2());
+		b3.addActionListener(new b3());
+		b4.addActionListener(new b4());
+
+	}
+	//버튼 클릭시 패널 전환
+	class b1 implements ActionListener { // 버튼 키 눌리면 패널 2번 호출
+		public void actionPerformed(ActionEvent e) {
+			win.change("panel02");
+		}
+	}
+
+	class b2 implements ActionListener { // 버튼 키 눌리면 패널 3번 호출
+		public void actionPerformed(ActionEvent e) {
+			win.change("panel03");
+		}
+	}
+
+	class b3 implements ActionListener { // 버튼 키 눌리면 패널 4번 호출
+		public void actionPerformed(ActionEvent e) {
+			win.change("panel04");
+		}
+	}
+
+	class b4 implements ActionListener { // 버튼 키 눌리면 패널 5번 호출
+		public void actionPerformed(ActionEvent e) {
+			win.change("panel05");
+		}
+	}
+}
+class JPanel002 extends JPanel {//abc 패널
+	private JAVA타자 win;
+
+	private ImageIcon b6image1 = new ImageIcon("Backbutton1.PNG");
+	private ImageIcon b6image2 = new ImageIcon("Backbutton2.PNG");
+
+	JTextField tf1;
+	JTextArea ta1, ta2;
+	JLabel jb1, jb2, jb3, jb4;
+	ArrayList<String> a;
+	int county = 0, countx = 0, count = 0;
+
+	private long start;
+	private long end;
+	
+	String[] word = { "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s",
+			"t", "u", "v", "w", "x", "y", "z" };
+	
+	//키보드 버튼 생성
+	JButton bt1 = new JButton("`");
+	JButton bt2 = new JButton("1");
+	JButton bt3 = new JButton("2");
+	JButton bt4 = new JButton("3");
+	JButton bt5 = new JButton("4");
+	JButton bt6 = new JButton("5");
+	JButton bt7 = new JButton("6");
+	JButton bt8 = new JButton("7");
+	JButton bt9 = new JButton("8");
+	JButton bt10 = new JButton("9");
+	JButton bt11 = new JButton("0");
+	JButton bt12 = new JButton("-");
+	JButton bt13 = new JButton("=");
+	JButton bt14 = new JButton("backspace");
+
+	JButton bt15 = new JButton("tab");
+	JButton bt16 = new JButton("q");
+	JButton bt17 = new JButton("w");
+	JButton bt18 = new JButton("e");
+	JButton bt19 = new JButton("r");
+	JButton bt20 = new JButton("t");
+	JButton bt21 = new JButton("y");
+	JButton bt22 = new JButton("u");
+	JButton bt23 = new JButton("i");
+	JButton bt24 = new JButton("o");
+	JButton bt25 = new JButton("p");
+	JButton bt26 = new JButton("[");
+	JButton bt27 = new JButton("]");
+	JButton bt28 = new JButton("\\");
+
+	JButton bt29 = new JButton("lock");
+	JButton bt30 = new JButton("a");
+	JButton bt31 = new JButton("s");
+	JButton bt32 = new JButton("d");
+	JButton bt33 = new JButton("f");
+	JButton bt34 = new JButton("g");
+	JButton bt35 = new JButton("h");
+	JButton bt36 = new JButton("j");
+	JButton bt37 = new JButton("k");
+	JButton bt38 = new JButton("l");
+	JButton bt39 = new JButton(";");
+	JButton bt40 = new JButton("'");
+	JButton bt41 = new JButton("enter");
+
+	JButton bt42 = new JButton("shift");
+	JButton bt43 = new JButton("z");
+	JButton bt44 = new JButton("x");
+	JButton bt45 = new JButton("c");
+	JButton bt46 = new JButton("v");
+	JButton bt47 = new JButton("b");
+	JButton bt48 = new JButton("n");
+	JButton bt49 = new JButton("m");
+	JButton bt50 = new JButton(",");
+	JButton bt51 = new JButton(".");
+	JButton bt52 = new JButton("/");
+	JButton bt53 = new JButton("shift");
+
+	JButton bt54 = new JButton("ctrl");
+	JButton bt55 = new JButton("fn");
+	JButton bt56 = new JButton("");
+	JButton bt57 = new JButton("alt");
+	JButton bt58 = new JButton("");
+	JButton bt59 = new JButton("alt");
+	JButton bt60 = new JButton("ctrl");
+	JButton bt61 = new JButton("\u2190");
+	JButton bt62 = new JButton("\u2193");
+	JButton bt63 = new JButton("\u2192");
+
+	public JPanel002(JAVA타자 win) {
+		this.win = win;
+		setLayout(null);
+
+		JPanel p1 = new JPanel();
+		p1.setLayout(null);
+		//뒤로가기 버튼 생성
+		JButton b6 = new JButton(b6image1);
+		b6.setRolloverIcon(b6image2);
+		b6.setBounds(0, 0, 50, 50);
+		b6.setBorderPainted(false);
+		b6.setContentAreaFilled(false);
+		b6.setFocusPainted(false);
+		b6.addActionListener(new b6());
+		p1.add(b6);
+
+		JLabel resultText = new JLabel("a");
+
+		jb1 = new JLabel("a");
+		jb1.setFont(new Font("고딕", Font.BOLD, 80));
+		jb1.setBounds(610, 0, 100, 100);
+		p1.add(jb1);
+
+		jb2 = new JLabel("진행도: 0%");
+		jb2.setFont(new Font("고딕", Font.BOLD, 20));
+		jb2.setBounds(580, 30, 200, 200);
+		p1.add(jb2);
+
+		jb3 = new JLabel("오타수: 0 개");
+		jb3.setFont(new Font("고딕", Font.BOLD, 20));
+		jb3.setBounds(580, 70, 200, 200);
+		p1.add(jb3);
+
+		jb4 = new JLabel("정확도: 0%");
+		jb4.setFont(new Font("고딕", Font.BOLD, 20));
+		jb4.setBounds(580, 110, 200, 200);
+		p1.add(jb4);
+
+		tf1 = new JTextField(20);
+		tf1.setBounds(560, 235, 150, 30);
+		tf1.addKeyListener(new keybutton());
+		tf1.addKeyListener(new Check());
+		tf1.setFocusable(true);
+		tf1.requestFocus();
+		p1.add(tf1);
+
+		ta1 = new JTextArea("");
+		ta1.setBounds(525, 270, 230, 20);
+		p1.add(ta1);
+		
+		ta2 = new JTextArea("");
+		ta2.setBounds(605, 270, 230, 20);
+		p1.add(ta2);
+
+		start = System.currentTimeMillis();
+		String[] word = { "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s",
+				"t", "u", "v", "w", "x", "y", "z" };
+		
+		a = new ArrayList<String>();
+		for (int i = 0; i < word.length; i++)
+			a.add(word[i]);
+
+		p1.setBounds(0, 0, 1280, 720);
+		p1.setBackground(Color.WHITE);
+		add(p1);
+
+		JPanel p = new JPanel();
+		p.setLayout(null);
+		p.setBounds(284, 300, 712, 190);
+		
+		//버튼 위치 설정
+		bt1.setBounds(0, 0, 38, 38);
+		bt2.setBounds(38, 0, 48, 38);
+		bt3.setBounds(86, 0, 48, 38);
+		bt4.setBounds(134, 0, 48, 38);
+		bt5.setBounds(182, 0, 48, 38);
+		bt6.setBounds(230, 0, 48, 38);
+		bt7.setBounds(278, 0, 48, 38);
+		bt8.setBounds(326, 0, 48, 38);
+		bt9.setBounds(374, 0, 48, 38);
+		bt10.setBounds(422, 0, 48, 38);
+		bt11.setBounds(470, 0, 48, 38);
+		bt12.setBounds(518, 0, 48, 38);
+		bt13.setBounds(566, 0, 48, 38);
+		bt14.setBounds(614, 0, 98, 38);
+
+		bt15.setBounds(0, 38, 65, 38);
+		bt16.setBounds(65, 38, 48, 38);
+		bt17.setBounds(113, 38, 48, 38);
+		bt18.setBounds(161, 38, 48, 38);
+		bt19.setBounds(209, 38, 48, 38);
+		bt20.setBounds(257, 38, 48, 38);
+		bt21.setBounds(305, 38, 48, 38);
+		bt22.setBounds(353, 38, 48, 38);
+		bt23.setBounds(401, 38, 48, 38);
+		bt24.setBounds(449, 38, 48, 38);
+		bt25.setBounds(497, 38, 48, 38);
+		bt26.setBounds(545, 38, 48, 38);
+		bt27.setBounds(593, 38, 48, 38);
+		bt28.setBounds(641, 38, 71, 38);
+
+		bt29.setBounds(0, 76, 80, 38);
+		bt30.setBounds(80, 76, 48, 38);
+		bt31.setBounds(128, 76, 48, 38);
+		bt32.setBounds(176, 76, 48, 38);
+		bt33.setBounds(224, 76, 48, 38);
+		bt34.setBounds(272, 76, 48, 38);
+		bt35.setBounds(320, 76, 48, 38);
+		bt36.setBounds(368, 76, 48, 38);
+		bt37.setBounds(416, 76, 48, 38);
+		bt38.setBounds(464, 76, 48, 38);
+		bt39.setBounds(512, 76, 48, 38);
+		bt40.setBounds(560, 76, 48, 38);
+		bt41.setBounds(608, 76, 104, 38);
+
+		bt42.setBounds(0, 114, 104, 38);
+		bt43.setBounds(104, 114, 48, 38);
+		bt44.setBounds(152, 114, 48, 38);
+		bt45.setBounds(200, 114, 48, 38);
+		bt46.setBounds(248, 114, 48, 38);
+		bt47.setBounds(296, 114, 48, 38);
+		bt48.setBounds(344, 114, 48, 38);
+		bt49.setBounds(392, 114, 48, 38);
+		bt50.setBounds(440, 114, 48, 38);
+		bt51.setBounds(488, 114, 48, 38);
+		bt52.setBounds(536, 114, 48, 38);
+		bt53.setBounds(584, 114, 128, 38);
+
+		bt54.setBounds(0, 152, 53, 38);
+		bt55.setBounds(53, 152, 51, 38);
+		bt56.setBounds(104, 152, 48, 38);
+		bt57.setBounds(152, 152, 48, 38);
+		bt58.setBounds(200, 152, 272, 38);
+		bt59.setBounds(472, 152, 48, 38);
+		bt60.setBounds(520, 152, 53, 38);
+		bt61.setBounds(568, 152, 48, 38);
+		bt62.setBounds(616, 152, 48, 38);
+		bt63.setBounds(664, 152, 48, 38);
+
+		p.add(bt1); p.add(bt2); p.add(bt3); p.add(bt4);
+		p.add(bt5); p.add(bt6); p.add(bt7); p.add(bt8);
+		p.add(bt9); p.add(bt10); p.add(bt11); p.add(bt12);
+		p.add(bt13); p.add(bt14); p.add(bt15); p.add(bt16);
+p.add(bt17); p.add(bt18); p.add(bt19); p.add(bt20);
+		p.add(bt21); p.add(bt22); p.add(bt23); p.add(bt24);
+		p.add(bt25); p.add(bt26); p.add(bt27); p.add(bt28);
+
+		p.add(bt29);p.add(bt30);p.add(bt31);p.add(bt32);
+		p.add(bt33);p.add(bt34);p.add(bt35);p.add(bt36);
+p.add(bt37);p.add(bt38);p.add(bt39);p.add(bt40);
+		p.add(bt41);
+
+		p.add(bt42);p.add(bt43);p.add(bt44);p.add(bt45);
+		p.add(bt46);p.add(bt47);p.add(bt48);p.add(bt49);
+		p.add(bt50);p.add(bt51);p.add(bt52);p.add(bt53);
+		p.add(bt54);p.add(bt55);p.add(bt56);p.add(bt57);
+		p.add(bt58);p.add(bt59);p.add(bt60);p.add(bt61);
+		p.add(bt62);p.add(bt63);
+
+		p1.add(p);
+		
+	}
+
+	class b6 implements ActionListener { // 버튼 키 눌리면 패널 1번 호출
+		public void actionPerformed(ActionEvent e) {
+			win.change("panel01");
+		}
+	}
+	// 진행도, 오타수, 정확도, 타수 check
+	class Check implements KeyListener {
+		@Override
+		public void keyPressed(KeyEvent e) {
+			
+		}
+
+		@Override
+		public void keyReleased(KeyEvent e) {
+		if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+		county++; //enter 값 저장
+		if (county == 10) { //enter 10번 눌렀을때 
+		int result = JOptionPane.showConfirmDialog(null,"다시 하시겠습니까?", "Confirm", JOptionPane.YES_NO_OPTION);
+		 if(result == JOptionPane.YES_OPTION) {	 //새로 시작
+		 win.dispose();
+		 JAVA타자 win = new JAVA타자();
+
+		win.jpanel001 = new JPanel001(win);
+		win.jpanel002 = new JPanel002(win);
+		win.jpanel003 = new JPanel003(win);
+		win.jpanel004 = new JPanel004(win);
+		win.jpanel005 = new JPanel005(win);
+
+								win.setTitle("JAVA타자연습");
+	win.add(win.jpanel001);
+								win.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	win.setSize(1280, 720);
+	win.setLocation(340, 150);
+win.setResizable(true);
+	win.setVisible(true);
+							 
+	}else {
+		System.exit(0);
+	}
+	}
+	jb2.setText("진행도: " + Integer.toString((county))  + "0%");
+				
+	if (jb1.getText().equals(tf1.getText())) {
+	count++;
+	jb4.setText("정확도: " + Integer.toString((count)) + "0%");
+
+	Random r = new Random();
+	end = System.currentTimeMillis();
+		
+	ta1.setText("실시간 타수: " + tf1.getText().length() / ((end - start) / 1000.0 / 60.0));
+	ta1.setVisible(true);
+					
+	jb1.setText(a.get(r.nextInt(a.size())));
+	tf1.setText("");
+	} else {
+	countx++; // 틀린값 저장
+	jb3.setText("오타수: " + Integer.toString((countx)) + "개");	
+	ta2.setText("틀렸습니다.");
+	ta1.setVisible(false);
+	tf1.setText("");
+					
+			}
+		}
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+		}
+	}
+	// 키보드 늘렀을 때 누른 키 빨간색으로 바뀜
+	class keybutton implements KeyListener {
+		@Override
+		public void keyTyped(KeyEvent e) {
+		}
+
+		@Override
+		public void keyPressed(KeyEvent e) {
+			int k = e.getKeyCode();
+			if (k == KeyEvent.VK_Q) {
+				bt16.setBackground(Color.red);
+			} else if (k == KeyEvent.VK_W) {
+				bt17.setBackground(Color.red);
+			} else if (k == KeyEvent.VK_E) {
+				bt18.setBackground(Color.red);
+			} else if (k == KeyEvent.VK_R) {
+				bt19.setBackground(Color.red);
+			} else if (k == KeyEvent.VK_T) {
+				bt20.setBackground(Color.red);
+			} else if (k == KeyEvent.VK_Y) {
+				bt21.setBackground(Color.red);
+			} else if (k == KeyEvent.VK_U) {
+				bt22.setBackground(Color.red);
+			} else if (k == KeyEvent.VK_I) {
+				bt23.setBackground(Color.red);
+			} else if (k == KeyEvent.VK_O) {
+				bt24.setBackground(Color.red);
+			} else if (k == KeyEvent.VK_P) {
+				bt25.setBackground(Color.red);
+			} else if (k == KeyEvent.VK_A) {
+				bt30.setBackground(Color.red);
+			} else if (k == KeyEvent.VK_S) {
+				bt31.setBackground(Color.red);
+			} else if (k == KeyEvent.VK_D) {
+				bt32.setBackground(Color.red);
+			} else if (k == KeyEvent.VK_F) {
+				bt33.setBackground(Color.red);
+			} else if (k == KeyEvent.VK_G) {
+				bt34.setBackground(Color.red);
+			} else if (k == KeyEvent.VK_H) {
+				bt35.setBackground(Color.red);
+			} else if (k == KeyEvent.VK_J) {
+				bt36.setBackground(Color.red);
+			} else if (k == KeyEvent.VK_K) {
+				bt37.setBackground(Color.red);
+			} else if (k == KeyEvent.VK_L) {
+				bt38.setBackground(Color.red);
+			} else if (k == KeyEvent.VK_ENTER) {
+				bt41.setBackground(Color.red);
+			} else if (k == KeyEvent.VK_SHIFT) {
+				bt42.setBackground(Color.red);
+			} else if (k == KeyEvent.VK_Z) {
+				bt43.setBackground(Color.red);
+			} else if (k == KeyEvent.VK_X) {
+				bt44.setBackground(Color.red);
+			} else if (k == KeyEvent.VK_C) {
+				bt45.setBackground(Color.red);
+			} else if (k == KeyEvent.VK_V) {
+				bt46.setBackground(Color.red);
+			} else if (k == KeyEvent.VK_B) {
+				bt47.setBackground(Color.red);
+			} else if (k == KeyEvent.VK_N) {
+				bt48.setBackground(Color.red);
+			} else if (k == KeyEvent.VK_M) {
+				bt49.setBackground(Color.red);
+			} else if (k == KeyEvent.VK_SHIFT) {
+				bt53.setBackground(Color.red);
+			} else if (k == KeyEvent.VK_SPACE) {
+				bt58.setBackground(Color.red);
+		}
+	}
+ //누른 키 똇을 때 원래 색깔로 돌아옴
+		@Override
+		public void keyReleased(KeyEvent e) {
+			int k = e.getKeyCode();
+			if (k == KeyEvent.VK_Q) {
+				bt16.setBackground(null);
+			} else if (k == KeyEvent.VK_W) {
+				bt17.setBackground(null);
+			} else if (k == KeyEvent.VK_E) {
+				bt18.setBackground(null);
+			} else if (k == KeyEvent.VK_R) {
+				bt19.setBackground(null);
+			} else if (k == KeyEvent.VK_T) {
+				bt20.setBackground(null);
+			} else if (k == KeyEvent.VK_Y) {
+				bt21.setBackground(null);
+			} else if (k == KeyEvent.VK_U) {
+				bt22.setBackground(null);
+			} else if (k == KeyEvent.VK_I) {
+				bt23.setBackground(null);
+			} else if (k == KeyEvent.VK_O) {
+				bt24.setBackground(null);
+			} else if (k == KeyEvent.VK_P) {
+				bt25.setBackground(null);
+			} else if (k == KeyEvent.VK_A) {
+				bt30.setBackground(null);
+			} else if (k == KeyEvent.VK_S) {
+				bt31.setBackground(null);
+			} else if (k == KeyEvent.VK_D) {
+				bt32.setBackground(null);
+			} else if (k == KeyEvent.VK_F) {
+				bt33.setBackground(null);
+			} else if (k == KeyEvent.VK_G) {
+				bt34.setBackground(null);
+			} else if (k == KeyEvent.VK_H) {
+				bt35.setBackground(null);
+			} else if (k == KeyEvent.VK_J) {
+				bt36.setBackground(null);
+			} else if (k == KeyEvent.VK_K) {
+				bt37.setBackground(null);
+			} else if (k == KeyEvent.VK_L) {
+				bt38.setBackground(null);
+			} else if (k == KeyEvent.VK_ENTER) {
+				bt41.setBackground(null);
+			} else if (k == KeyEvent.VK_SHIFT) {
+				bt42.setBackground(null);
+			} else if (k == KeyEvent.VK_Z) {
+				bt43.setBackground(null);
+			} else if (k == KeyEvent.VK_X) {
+				bt44.setBackground(null);
+			} else if (k == KeyEvent.VK_C) {
+				bt45.setBackground(null);
+			} else if (k == KeyEvent.VK_V) {
+				bt46.setBackground(null);
+			} else if (k == KeyEvent.VK_B) {
+				bt47.setBackground(null);
+			} else if (k == KeyEvent.VK_N) {
+				bt48.setBackground(null);
+			} else if (k == KeyEvent.VK_M) {
+				bt49.setBackground(null);
+			} else if (k == KeyEvent.VK_SHIFT) {
+				bt53.setBackground(null);
+			} else if (k == KeyEvent.VK_SPACE) {
+				bt58.setBackground(null);
+			}
+		}
+	}
+}
+
+
+class JPanel003 extends JPanel { //ABC 패널
+
+	private JAVA타자 win;
+
+	private ImageIcon b6image1 = new ImageIcon("Backbutton1.PNG");
+	private ImageIcon b6image2 = new ImageIcon("Backbutton2.PNG");
+	
+	JTextField tf1;
+	JTextArea ta1, ta2;
+	JLabel jb1, jb2, jb3, jb4;
+	ArrayList<String> a;
+	int county = 0, countx = 0, count = 0;
+
+	private long start;
+	private long end;
+	
+	String[] word = { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S",
+			"T", "U", "V", "W", "X", "Y", "Z" };
+
+	JButton bt1 = new JButton("`");
+	JButton bt2 = new JButton("1");
+	JButton bt3 = new JButton("2");
+	JButton bt4 = new JButton("3");
+	JButton bt5 = new JButton("4");
+	JButton bt6 = new JButton("5");
+	JButton bt7 = new JButton("6");
+	JButton bt8 = new JButton("7");
+	JButton bt9 = new JButton("8");
+	JButton bt10 = new JButton("9");
+	JButton bt11 = new JButton("0");
+	JButton bt12 = new JButton("-");
+	JButton bt13 = new JButton("=");
+	JButton bt14 = new JButton("backspace");
+
+	JButton bt15 = new JButton("tab");
+	JButton bt16 = new JButton("Q");
+	JButton bt17 = new JButton("W");
+	JButton bt18 = new JButton("E");
+	JButton bt19 = new JButton("R");
+	JButton bt20 = new JButton("T");
+	JButton bt21 = new JButton("Y");
+	JButton bt22 = new JButton("U");
+	JButton bt23 = new JButton("I");
+	JButton bt24 = new JButton("O");
+	JButton bt25 = new JButton("P");
+	JButton bt26 = new JButton("[");
+	JButton bt27 = new JButton("]");
+	JButton bt28 = new JButton("\\");
+
+	JButton bt29 = new JButton("lock");
+	JButton bt30 = new JButton("A");
+	JButton bt31 = new JButton("S");
+	JButton bt32 = new JButton("D");
+	JButton bt33 = new JButton("F");
+	JButton bt34 = new JButton("G");
+	JButton bt35 = new JButton("H");
+	JButton bt36 = new JButton("J");
+	JButton bt37 = new JButton("K");
+	JButton bt38 = new JButton("L");
+	JButton bt39 = new JButton(";");
+	JButton bt40 = new JButton("'");
+	JButton bt41 = new JButton("enter");
+
+	JButton bt42 = new JButton("shift");
+	JButton bt43 = new JButton("Z");
+	JButton bt44 = new JButton("X");
+	JButton bt45 = new JButton("C");
+	JButton bt46 = new JButton("V");
+	JButton bt47 = new JButton("B");
+	JButton bt48 = new JButton("N");
+	JButton bt49 = new JButton("M");
+	JButton bt50 = new JButton(",");
+	JButton bt51 = new JButton(".");
+	JButton bt52 = new JButton("/");
+	JButton bt53 = new JButton("shift");
+
+	JButton bt54 = new JButton("ctrl");
+	JButton bt55 = new JButton("fn");
+	JButton bt56 = new JButton("");
+	JButton bt57 = new JButton("alt");
+	JButton bt58 = new JButton("");
+	JButton bt59 = new JButton("alt");
+	JButton bt60 = new JButton("ctrl");
+	JButton bt61 = new JButton("\u2190");
+	JButton bt62 = new JButton("\u2193");
+	JButton bt63 = new JButton("\u2192");
+
+	public JPanel003(JAVA타자 win) {
+		this.win = win;
+		setLayout(null);
+
+		JPanel p2 = new JPanel();
+		p2.setLayout(null);
+
+		JButton b6 = new JButton(b6image1);
+		b6.setRolloverIcon(b6image2);
+		b6.setBounds(0, 0, 50, 50);
+		b6.setBorderPainted(false);
+		b6.setContentAreaFilled(false);
+		b6.setFocusPainted(false);
+		b6.addActionListener(new b7());
+
+		p2.add(b6);
+		p2.setBounds(0, 0, 1280, 720);
+		p2.setBackground(Color.WHITE);
+		add(p2);
+		
+		JLabel resultText = new JLabel("A");
+		
+		jb1 = new JLabel("A");
+		jb1.setFont(new Font("고딕", Font.BOLD, 80));
+		jb1.setBounds(610, 0, 100, 100);
+		p2.add(jb1);
+
+		jb2 = new JLabel("진행도: 0%");
+		jb2.setFont(new Font("고딕", Font.BOLD, 20));
+		jb2.setBounds(580, 30, 200, 200);
+		p2.add(jb2);
+
+		jb3 = new JLabel("오타수: 0 개");
+		jb3.setFont(new Font("고딕", Font.BOLD, 20));
+		jb3.setBounds(580, 70, 200, 200);
+		p2.add(jb3);
+
+		jb4 = new JLabel("정확도: 0%");
+		jb4.setFont(new Font("고딕", Font.BOLD, 20));
+		jb4.setBounds(580, 110, 200, 200);
+		p2.add(jb4);
+
+		tf1 = new JTextField(20);
+		tf1.setBounds(560, 235, 150, 30);
+		tf1.addKeyListener(new keybutton());
+		tf1.addKeyListener(new Check());
+		tf1.setFocusable(true);
+		tf1.requestFocus();
+		p2.add(tf1);
+
+		ta1 = new JTextArea("");
+		ta1.setBounds(580, 270, 100, 20);
+		p2.add(ta1);
+
+		ta2 = new JTextArea("");
+		ta2.setBounds(605, 270, 230, 20);
+		p2.add(ta2);
+
+
+		start = System.currentTimeMillis();
+		String[] word = { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S",
+				"T", "U", "V", "W", "X", "Y", "Z" };
+		a = new ArrayList<String>();
+
+		for (int i = 0; i < word.length; i++)
+			a.add(word[i]);
+
+		p2.setBounds(0, 0, 1280, 720);
+		p2.setBackground(Color.WHITE);
+		add(p2);
+
+		JPanel p = new JPanel();
+		p.setLayout(null);
+		p.setBounds(284, 300, 712, 190);
+
+		bt1.setBounds(0, 0, 38, 38);
+		bt2.setBounds(38, 0, 48, 38);
+		bt3.setBounds(86, 0, 48, 38);
+		bt4.setBounds(134, 0, 48, 38);
+		bt5.setBounds(182, 0, 48, 38);
+		bt6.setBounds(230, 0, 48, 38);
+		bt7.setBounds(278, 0, 48, 38);
+		bt8.setBounds(326, 0, 48, 38);
+		bt9.setBounds(374, 0, 48, 38);
+		bt10.setBounds(422, 0, 48, 38);
+		bt11.setBounds(470, 0, 48, 38);
+		bt12.setBounds(518, 0, 48, 38);
+		bt13.setBounds(566, 0, 48, 38);
+		bt14.setBounds(614, 0, 98, 38);
+
+		bt15.setBounds(0, 38, 65, 38);
+		bt16.setBounds(65, 38, 48, 38);
+		bt17.setBounds(113, 38, 48, 38);
+		bt18.setBounds(161, 38, 48, 38);
+		bt19.setBounds(209, 38, 48, 38);
+		bt20.setBounds(257, 38, 48, 38);
+		bt21.setBounds(305, 38, 48, 38);
+		bt22.setBounds(353, 38, 48, 38);
+		bt23.setBounds(401, 38, 48, 38);
+		bt24.setBounds(449, 38, 48, 38);
+		bt25.setBounds(497, 38, 48, 38);
+		bt26.setBounds(545, 38, 48, 38);
+		bt27.setBounds(593, 38, 48, 38);
+		bt28.setBounds(641, 38, 71, 38);
+
+		bt29.setBounds(0, 76, 80, 38);
+		bt30.setBounds(80, 76, 48, 38);
+		bt31.setBounds(128, 76, 48, 38);
+		bt32.setBounds(176, 76, 48, 38);
+		bt33.setBounds(224, 76, 48, 38);
+		bt34.setBounds(272, 76, 48, 38);
+		bt35.setBounds(320, 76, 48, 38);
+		bt36.setBounds(368, 76, 48, 38);
+		bt37.setBounds(416, 76, 48, 38);
+		bt38.setBounds(464, 76, 48, 38);
+		bt39.setBounds(512, 76, 48, 38);
+		bt40.setBounds(560, 76, 48, 38);
+		bt41.setBounds(608, 76, 104, 38);
+
+		bt42.setBounds(0, 114, 104, 38);
+		bt43.setBounds(104, 114, 48, 38);
+		bt44.setBounds(152, 114, 48, 38);
+		bt45.setBounds(200, 114, 48, 38);
+		bt46.setBounds(248, 114, 48, 38);
+		bt47.setBounds(296, 114, 48, 38);
+		bt48.setBounds(344, 114, 48, 38);
+		bt49.setBounds(392, 114, 48, 38);
+		bt50.setBounds(440, 114, 48, 38);
+		bt51.setBounds(488, 114, 48, 38);
+		bt52.setBounds(536, 114, 48, 38);
+		bt53.setBounds(584, 114, 128, 38);
+
+		bt54.setBounds(0, 152, 53, 38);
+		bt55.setBounds(53, 152, 51, 38);
+		bt56.setBounds(104, 152, 48, 38);
+		bt57.setBounds(152, 152, 48, 38);
+		bt58.setBounds(200, 152, 272, 38);
+		bt59.setBounds(472, 152, 48, 38);
+		bt60.setBounds(520, 152, 53, 38);
+		bt61.setBounds(568, 152, 48, 38);
+		bt62.setBounds(616, 152, 48, 38);
+		bt63.setBounds(664, 152, 48, 38);
+
+		p.add(bt1); p.add(bt2); p.add(bt3); p.add(bt4);
+		p.add(bt5); p.add(bt6); p.add(bt7); p.add(bt8);
+		p.add(bt9); p.add(bt10); p.add(bt11); p.add(bt12);
+		p.add(bt13); p.add(bt14); p.add(bt15); p.add(bt16);
+p.add(bt17); p.add(bt18); p.add(bt19); p.add(bt20);
+		p.add(bt21); p.add(bt22); p.add(bt23); p.add(bt24);
+		p.add(bt25); p.add(bt26); p.add(bt27); p.add(bt28);
+
+		p.add(bt29);p.add(bt30);p.add(bt31);p.add(bt32);
+		p.add(bt33);p.add(bt34);p.add(bt35);p.add(bt36);
+p.add(bt37);p.add(bt38);p.add(bt39);p.add(bt40);
+		p.add(bt41);
+
+		p.add(bt42);p.add(bt43);p.add(bt44);p.add(bt45);
+		p.add(bt46);p.add(bt47);p.add(bt48);p.add(bt49);
+		p.add(bt50);p.add(bt51);p.add(bt52);p.add(bt53);
+		p.add(bt54);p.add(bt55);p.add(bt56);p.add(bt57);
+		p.add(bt58);p.add(bt59);p.add(bt60);p.add(bt61);
+		p.add(bt62);p.add(bt63);
+
+
+		p2.add(p);
+
+	}
+
+	class b7 implements ActionListener { // 버튼 키 눌리면 패널 1번 호출
+		public void actionPerformed(ActionEvent e) {
+			win.change("panel01");
+		}
+	}
+
+
+	// 진행도, 오타수, 정확도, 타수 check
+	class Check implements KeyListener {
+		@Override
+		public void keyPressed(KeyEvent e) {
+			
+		}
+
+		@Override
+		public void keyReleased(KeyEvent e) {
+		if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+		county++; //enter 값 저장
+		if (county == 10) { //enter 10번 눌렀을때 
+		int result = JOptionPane.showConfirmDialog(null,"다시 하시겠습니까?", "Confirm", JOptionPane.YES_NO_OPTION);
+		 if(result == JOptionPane.YES_OPTION) {	 //새로 시작
+		 win.dispose();
+		 JAVA타자 win = new JAVA타자();
+
+		win.jpanel001 = new JPanel001(win);
+		win.jpanel002 = new JPanel002(win);
+		win.jpanel003 = new JPanel003(win);
+		win.jpanel004 = new JPanel004(win);
+		win.jpanel005 = new JPanel005(win);
+
+								win.setTitle("JAVA타자연습");
+	win.add(win.jpanel001);
+								win.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	win.setSize(1280, 720);
+	win.setLocation(340, 150);
+win.setResizable(true);
+	win.setVisible(true);
+							 
+	}else {
+		System.exit(0);
+	}
+	}
+	jb2.setText("진행도: " + Integer.toString((county))  + "0%");
+				
+	if (jb1.getText().equals(tf1.getText())) {
+	count++;
+	jb4.setText("정확도: " + Integer.toString((count)) + "0%");
+
+	Random r = new Random();
+	end = System.currentTimeMillis();
+		
+	ta1.setText("실시간 타수: " + tf1.getText().length() / ((end - start) / 1000.0 / 60.0));
+	ta1.setVisible(true);
+					
+	jb1.setText(a.get(r.nextInt(a.size())));
+	tf1.setText("");
+	} else {
+	countx++; // 틀린값 저장
+	jb3.setText("오타수: " + Integer.toString((countx)) + "개");	
+	ta2.setText("틀렸습니다.");
+	ta1.setVisible(false);
+	tf1.setText("");
+					
+			}
+		}
+	}
+
+		@Override
+		public void keyTyped(KeyEvent e) {
+		}
+	}
+
+	class keybutton implements KeyListener {
+		@Override
+		public void keyTyped(KeyEvent e) {
+		}
+
+		@Override
+		public void keyPressed(KeyEvent e) {
+			int k = e.getKeyCode();
+			if (k == KeyEvent.VK_Q) {
+				bt16.setBackground(Color.red);
+			} else if (k == KeyEvent.VK_W) {
+				bt17.setBackground(Color.red);
+			} else if (k == KeyEvent.VK_E) {
+				bt18.setBackground(Color.red);
+			} else if (k == KeyEvent.VK_R) {
+				bt19.setBackground(Color.red);
+			} else if (k == KeyEvent.VK_T) {
+				bt20.setBackground(Color.red);
+			} else if (k == KeyEvent.VK_Y) {
+				bt21.setBackground(Color.red);
+			} else if (k == KeyEvent.VK_U) {
+				bt22.setBackground(Color.red);
+			} else if (k == KeyEvent.VK_I) {
+				bt23.setBackground(Color.red);
+			} else if (k == KeyEvent.VK_O) {
+				bt24.setBackground(Color.red);
+			} else if (k == KeyEvent.VK_P) {
+				bt25.setBackground(Color.red);
+			} else if (k == KeyEvent.VK_A) {
+				bt30.setBackground(Color.red);
+			} else if (k == KeyEvent.VK_S) {
+				bt31.setBackground(Color.red);
+			} else if (k == KeyEvent.VK_D) {
+				bt32.setBackground(Color.red);
+			} else if (k == KeyEvent.VK_F) {
+				bt33.setBackground(Color.red);
+			} else if (k == KeyEvent.VK_G) {
+				bt34.setBackground(Color.red);
+			} else if (k == KeyEvent.VK_H) {
+				bt35.setBackground(Color.red);
+			} else if (k == KeyEvent.VK_J) {
+				bt36.setBackground(Color.red);
+			} else if (k == KeyEvent.VK_K) {
+				bt37.setBackground(Color.red);
+			} else if (k == KeyEvent.VK_L) {
+				bt38.setBackground(Color.red);
+			} else if (k == KeyEvent.VK_ENTER) {
+				bt41.setBackground(Color.red);
+			} else if (k == KeyEvent.VK_SHIFT) {
+				bt42.setBackground(Color.red);
+			} else if (k == KeyEvent.VK_Z) {
+				bt43.setBackground(Color.red);
+			} else if (k == KeyEvent.VK_X) {
+				bt44.setBackground(Color.red);
+			} else if (k == KeyEvent.VK_C) {
+				bt45.setBackground(Color.red);
+			} else if (k == KeyEvent.VK_V) {
+				bt46.setBackground(Color.red);
+			} else if (k == KeyEvent.VK_B) {
+				bt47.setBackground(Color.red);
+			} else if (k == KeyEvent.VK_N) {
+				bt48.setBackground(Color.red);
+			} else if (k == KeyEvent.VK_M) {
+				bt49.setBackground(Color.red);
+			} else if (k == KeyEvent.VK_SHIFT) {
+				bt53.setBackground(Color.red);
+			} else if (k == KeyEvent.VK_SPACE) {
+				bt58.setBackground(Color.red);
+			}
+		}
+
+		@Override
+		public void keyReleased(KeyEvent e) {
+			int k = e.getKeyCode();
+			if (k == KeyEvent.VK_Q) {
+				bt16.setBackground(null);
+			} else if (k == KeyEvent.VK_W) {
+				bt17.setBackground(null);
+			} else if (k == KeyEvent.VK_E) {
+				bt18.setBackground(null);
+			} else if (k == KeyEvent.VK_R) {
+				bt19.setBackground(null);
+			} else if (k == KeyEvent.VK_T) {
+				bt20.setBackground(null);
+			} else if (k == KeyEvent.VK_Y) {
+				bt21.setBackground(null);
+			} else if (k == KeyEvent.VK_U) {
+				bt22.setBackground(null);
+			} else if (k == KeyEvent.VK_I) {
+				bt23.setBackground(null);
+			} else if (k == KeyEvent.VK_O) {
+				bt24.setBackground(null);
+			} else if (k == KeyEvent.VK_P) {
+				bt25.setBackground(null);
+			} else if (k == KeyEvent.VK_A) {
+				bt30.setBackground(null);
+			} else if (k == KeyEvent.VK_S) {
+				bt31.setBackground(null);
+			} else if (k == KeyEvent.VK_D) {
+				bt32.setBackground(null);
+			} else if (k == KeyEvent.VK_F) {
+				bt33.setBackground(null);
+			} else if (k == KeyEvent.VK_G) {
+				bt34.setBackground(null);
+			} else if (k == KeyEvent.VK_H) {
+				bt35.setBackground(null);
+			} else if (k == KeyEvent.VK_J) {
+				bt36.setBackground(null);
+			} else if (k == KeyEvent.VK_K) {
+				bt37.setBackground(null);
+			} else if (k == KeyEvent.VK_L) {
+				bt38.setBackground(null);
+			} else if (k == KeyEvent.VK_ENTER) {
+				bt41.setBackground(null);
+			} else if (k == KeyEvent.VK_SHIFT) {
+				bt42.setBackground(null);
+			} else if (k == KeyEvent.VK_Z) {
+				bt43.setBackground(null);
+			} else if (k == KeyEvent.VK_X) {
+				bt44.setBackground(null);
+			} else if (k == KeyEvent.VK_C) {
+				bt45.setBackground(null);
+			} else if (k == KeyEvent.VK_V) {
+				bt46.setBackground(null);
+			} else if (k == KeyEvent.VK_B) {
+				bt47.setBackground(null);
+			} else if (k == KeyEvent.VK_N) {
+				bt48.setBackground(null);
+			} else if (k == KeyEvent.VK_M) {
+				bt49.setBackground(null);
+			} else if (k == KeyEvent.VK_SHIFT) {
+				bt53.setBackground(null);
+			} else if (k == KeyEvent.VK_SPACE) {
+				bt58.setBackground(null);
+			}
+		}
+	}
+
+}
+
+class JPanel004 extends JPanel {
+
+	private JAVA타자 win;
+
+	private ImageIcon b6image1 = new ImageIcon("Backbutton1.PNG");
+	private ImageIcon b6image2 = new ImageIcon("Backbutton2.PNG");
+
+	JTextField tf1;
+	JTextArea ta1, ta2;
+	JLabel jb1, jb2, jb3, jb4;
+	ArrayList<String> a;
+	int county = 0, countx = 0, count = 0;
+
+	private long start;
+	private long end;
+
+	String[] word = { "Actor", "Brave", "Money", "Tolly", "Music", "Movie", "Count", "Label", "Field", "Panel" };
+
+	JButton bt1 = new JButton("`");
+	JButton bt2 = new JButton("1");
+	JButton bt3 = new JButton("2");
+	JButton bt4 = new JButton("3");
+	JButton bt5 = new JButton("4");
+	JButton bt6 = new JButton("5");
+	JButton bt7 = new JButton("6");
+	JButton bt8 = new JButton("7");
+	JButton bt9 = new JButton("8");
+	JButton bt10 = new JButton("9");
+	JButton bt11 = new JButton("0");
+	JButton bt12 = new JButton("-");
+	JButton bt13 = new JButton("=");
+	JButton bt14 = new JButton("backspace");
+
+	JButton bt15 = new JButton("tab");
+	JButton bt16 = new JButton("q");
+	JButton bt17 = new JButton("w");
+	JButton bt18 = new JButton("e");
+	JButton bt19 = new JButton("r");
+	JButton bt20 = new JButton("t");
+	JButton bt21 = new JButton("y");
+	JButton bt22 = new JButton("u");
+	JButton bt23 = new JButton("i");
+	JButton bt24 = new JButton("o");
+	JButton bt25 = new JButton("p");
+	JButton bt26 = new JButton("[");
+	JButton bt27 = new JButton("]");
+	JButton bt28 = new JButton("\\");
+
+	JButton bt29 = new JButton("lock");
+	JButton bt30 = new JButton("a");
+	JButton bt31 = new JButton("s");
+	JButton bt32 = new JButton("d");
+	JButton bt33 = new JButton("f");
+	JButton bt34 = new JButton("g");
+	JButton bt35 = new JButton("h");
+	JButton bt36 = new JButton("j");
+	JButton bt37 = new JButton("k");
+	JButton bt38 = new JButton("l");
+	JButton bt39 = new JButton(";");
+	JButton bt40 = new JButton("'");
+	JButton bt41 = new JButton("enter");
+
+	JButton bt42 = new JButton("shift");
+	JButton bt43 = new JButton("z");
+	JButton bt44 = new JButton("x");
+	JButton bt45 = new JButton("c");
+	JButton bt46 = new JButton("v");
+	JButton bt47 = new JButton("b");
+	JButton bt48 = new JButton("n");
+	JButton bt49 = new JButton("m");
+	JButton bt50 = new JButton(",");
+	JButton bt51 = new JButton(".");
+	JButton bt52 = new JButton("/");
+	JButton bt53 = new JButton("shift");
+
+	JButton bt54 = new JButton("ctrl");
+	JButton bt55 = new JButton("fn");
+	JButton bt56 = new JButton("");
+	JButton bt57 = new JButton("alt");
+	JButton bt58 = new JButton("");
+	JButton bt59 = new JButton("alt");
+	JButton bt60 = new JButton("ctrl");
+	JButton bt61 = new JButton("\u2190");
+	JButton bt62 = new JButton("\u2193");
+	JButton bt63 = new JButton("\u2192");
+
+	public JPanel004(JAVA타자 win) {//WORD 패널
+		this.win = win;
+		setLayout(null);
+
+		JPanel p3 = new JPanel();
+		p3.setLayout(null);
+
+		JButton b6 = new JButton(b6image1);
+		b6.setRolloverIcon(b6image2);
+		b6.setBounds(0, 0, 50, 50);
+		b6.setBorderPainted(false);
+		b6.setContentAreaFilled(false);
+		b6.setFocusPainted(false);
+		b6.addActionListener(new b8());
+
+		p3.add(b6);
+		p3.setBounds(0, 0, 1280, 720);
+		p3.setBackground(Color.WHITE);
+		add(p3);
+		
+		JLabel resultText = new JLabel("Actor");
+
+		jb1 = new JLabel("Actor");
+		jb1.setFont(new Font("고딕", Font.BOLD, 50));
+		jb1.setBounds(570, 0, 150,150);
+		p3.add(jb1);
+
+		jb2 = new JLabel("진행도:0%");
+		jb2.setFont(new Font("고딕", Font.BOLD, 20));
+		jb2.setBounds(580, 30, 200, 200);
+		p3.add(jb2);
+
+		jb3 = new JLabel("오타수:0개");
+		jb3.setFont(new Font("고딕", Font.BOLD, 20));
+		jb3.setBounds(580, 70, 200, 200);
+		p3.add(jb3);
+
+		jb4 = new JLabel("정확도:0%");
+		jb4.setFont(new Font("고딕", Font.BOLD, 20));
+		jb4.setBounds(580, 110, 200, 200);
+		p3.add(jb4);
+
+		tf1 = new JTextField(20);
+		tf1.setBounds(560, 235, 150, 30);
+		tf1.addKeyListener(new keybutton());
+		tf1.addKeyListener(new Check());
+		tf1.setFocusable(true);
+		tf1.requestFocus();
+		p3.add(tf1);
+
+		ta1 = new JTextArea("");
+		ta1.setBounds(580, 270, 100, 20);
+		p3.add(ta1);
+
+		ta2 = new JTextArea("");
+		ta2.setBounds(605, 270, 300, 20);
+		p3.add(ta2);
+
+		start = System.currentTimeMillis();
+		String[] word =  { "Actor", "Brave", "Name", "Tolly", "Music", "Movie", "Count", "Label", "Field", "Panel" };
+		a = new ArrayList<String>();
+
+		for (int i = 0; i < word.length; i++)
+			a.add(word[i]);
+
+		p3.setBounds(0, 0, 1280, 720);
+		p3.setBackground(Color.WHITE);
+		add(p3);
+
+		JPanel p = new JPanel();
+		p.setLayout(null);
+		p.setBounds(284, 300, 712, 190);
+		
+		bt1.setBounds(0, 0, 38, 38);
+		bt2.setBounds(38, 0, 48, 38);
+		bt3.setBounds(86, 0, 48, 38);
+		bt4.setBounds(134, 0, 48, 38);
+		bt5.setBounds(182, 0, 48, 38);
+		bt6.setBounds(230, 0, 48, 38);
+		bt7.setBounds(278, 0, 48, 38);
+		bt8.setBounds(326, 0, 48, 38);
+		bt9.setBounds(374, 0, 48, 38);
+		bt10.setBounds(422, 0, 48, 38);
+		bt11.setBounds(470, 0, 48, 38);
+		bt12.setBounds(518, 0, 48, 38);
+		bt13.setBounds(566, 0, 48, 38);
+		bt14.setBounds(614, 0, 98, 38);
+
+		bt15.setBounds(0, 38, 65, 38);
+		bt16.setBounds(65, 38, 48, 38);
+		bt17.setBounds(113, 38, 48, 38);
+		bt18.setBounds(161, 38, 48, 38);
+		bt19.setBounds(209, 38, 48, 38);
+		bt20.setBounds(257, 38, 48, 38);
+		bt21.setBounds(305, 38, 48, 38);
+		bt22.setBounds(353, 38, 48, 38);
+		bt23.setBounds(401, 38, 48, 38);
+		bt24.setBounds(449, 38, 48, 38);
+		bt25.setBounds(497, 38, 48, 38);
+		bt26.setBounds(545, 38, 48, 38);
+		bt27.setBounds(593, 38, 48, 38);
+		bt28.setBounds(641, 38, 71, 38);
+
+		bt29.setBounds(0, 76, 80, 38);
+		bt30.setBounds(80, 76, 48, 38);
+		bt31.setBounds(128, 76, 48, 38);
+		bt32.setBounds(176, 76, 48, 38);
+		bt33.setBounds(224, 76, 48, 38);
+		bt34.setBounds(272, 76, 48, 38);
+		bt35.setBounds(320, 76, 48, 38);
+		bt36.setBounds(368, 76, 48, 38);
+		bt37.setBounds(416, 76, 48, 38);
+		bt38.setBounds(464, 76, 48, 38);
+		bt39.setBounds(512, 76, 48, 38);
+		bt40.setBounds(560, 76, 48, 38);
+		bt41.setBounds(608, 76, 104, 38);
+
+		bt42.setBounds(0, 114, 104, 38);
+		bt43.setBounds(104, 114, 48, 38);
+		bt44.setBounds(152, 114, 48, 38);
+		bt45.setBounds(200, 114, 48, 38);
+		bt46.setBounds(248, 114, 48, 38);
+		bt47.setBounds(296, 114, 48, 38);
+		bt48.setBounds(344, 114, 48, 38);
+		bt49.setBounds(392, 114, 48, 38);
+		bt50.setBounds(440, 114, 48, 38);
+		bt51.setBounds(488, 114, 48, 38);
+		bt52.setBounds(536, 114, 48, 38);
+		bt53.setBounds(584, 114, 128, 38);
+
+		bt54.setBounds(0, 152, 53, 38);
+		bt55.setBounds(53, 152, 51, 38);
+		bt56.setBounds(104, 152, 48, 38);
+		bt57.setBounds(152, 152, 48, 38);
+		bt58.setBounds(200, 152, 272, 38);
+		bt59.setBounds(472, 152, 48, 38);
+		bt60.setBounds(520, 152, 53, 38);
+		bt61.setBounds(568, 152, 48, 38);
+		bt62.setBounds(616, 152, 48, 38);
+		bt63.setBounds(664, 152, 48, 38);
+
+		p.add(bt1); p.add(bt2); p.add(bt3); p.add(bt4);
+		p.add(bt5); p.add(bt6); p.add(bt7); p.add(bt8);
+		p.add(bt9); p.add(bt10); p.add(bt11); p.add(bt12);
+		p.add(bt13); p.add(bt14); p.add(bt15); p.add(bt16);
+p.add(bt17); p.add(bt18); p.add(bt19); p.add(bt20);
+		p.add(bt21); p.add(bt22); p.add(bt23); p.add(bt24);
+		p.add(bt25); p.add(bt26); p.add(bt27); p.add(bt28);
+
+		p.add(bt29);p.add(bt30);p.add(bt31);p.add(bt32);
+		p.add(bt33);p.add(bt34);p.add(bt35);p.add(bt36);
+p.add(bt37);p.add(bt38);p.add(bt39);p.add(bt40);
+		p.add(bt41);
+
+		p.add(bt42);p.add(bt43);p.add(bt44);p.add(bt45);
+		p.add(bt46);p.add(bt47);p.add(bt48);p.add(bt49);
+		p.add(bt50);p.add(bt51);p.add(bt52);p.add(bt53);
+		p.add(bt54);p.add(bt55);p.add(bt56);p.add(bt57);
+		p.add(bt58);p.add(bt59);p.add(bt60);p.add(bt61);
+		p.add(bt62);p.add(bt63);
+
+
+		p3.add(p);
+
+	}
+
+	class b8 implements ActionListener { // 버튼 키 눌리면 패널 1번 호출
+		public void actionPerformed(ActionEvent e) {
+			win.change("panel01");
+		}
+	}
+
+	// 진행도, 오타수, 정확도, 타수 check
+	class Check implements KeyListener {
+		@Override
+		public void keyPressed(KeyEvent e) {
+			
+		}
+
+		@Override
+		public void keyReleased(KeyEvent e) {
+		if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+		county++; //enter 값 저장
+		if (county == 10) { //enter 10번 눌렀을때 
+		int result = JOptionPane.showConfirmDialog(null,"다시 하시겠습니까?", "Confirm", JOptionPane.YES_NO_OPTION);
+		 if(result == JOptionPane.YES_OPTION) {	 //새로 시작
+		 win.dispose();
+		 JAVA타자 win = new JAVA타자();
+
+		win.jpanel001 = new JPanel001(win);
+		win.jpanel002 = new JPanel002(win);
+		win.jpanel003 = new JPanel003(win);
+		win.jpanel004 = new JPanel004(win);
+		win.jpanel005 = new JPanel005(win);
+
+								win.setTitle("JAVA타자연습");
+	win.add(win.jpanel001);
+								win.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	win.setSize(1280, 720);
+	win.setLocation(340, 150);
+win.setResizable(true);
+	win.setVisible(true);
+							 
+	}else {
+		System.exit(0);
+	}
+	}
+	jb2.setText("진행도: " + Integer.toString((county))  + "0%");
+				
+	if (jb1.getText().equals(tf1.getText())) {
+	count++;
+	jb4.setText("정확도: " + Integer.toString((count)) + "0%");
+
+	Random r = new Random();
+	end = System.currentTimeMillis();
+		
+	ta1.setText("실시간 타수: " + tf1.getText().length() / ((end - start) / 1000.0 / 60.0));
+	ta1.setVisible(true);
+					
+	jb1.setText(a.get(r.nextInt(a.size())));
+	tf1.setText("");
+	} else {
+	countx++; // 틀린값 저장
+	jb3.setText("오타수: " + Integer.toString((countx)) + "개");	
+	ta2.setText("틀렸습니다.");
+	ta1.setVisible(false);
+	tf1.setText("");
+					
+			}
+		}
+	}
+
+
+		@Override
+		public void keyTyped(KeyEvent e) {
+		}
+	}
+
+	class keybutton implements KeyListener {
+		@Override
+		public void keyTyped(KeyEvent e) {
+		}
+
+		@Override
+		public void keyPressed(KeyEvent e) {
+			int k = e.getKeyCode();
+			if (k == KeyEvent.VK_Q) {
+				bt16.setBackground(Color.red);
+			} else if (k == KeyEvent.VK_W) {
+				bt17.setBackground(Color.red);
+			} else if (k == KeyEvent.VK_E) {
+				bt18.setBackground(Color.red);
+			} else if (k == KeyEvent.VK_R) {
+				bt19.setBackground(Color.red);
+			} else if (k == KeyEvent.VK_T) {
+				bt20.setBackground(Color.red);
+			} else if (k == KeyEvent.VK_Y) {
+				bt21.setBackground(Color.red);
+			} else if (k == KeyEvent.VK_U) {
+				bt22.setBackground(Color.red);
+			} else if (k == KeyEvent.VK_I) {
+				bt23.setBackground(Color.red);
+			} else if (k == KeyEvent.VK_O) {
+				bt24.setBackground(Color.red);
+			} else if (k == KeyEvent.VK_P) {
+				bt25.setBackground(Color.red);
+			} else if (k == KeyEvent.VK_A) {
+				bt30.setBackground(Color.red);
+			} else if (k == KeyEvent.VK_S) {
+				bt31.setBackground(Color.red);
+			} else if (k == KeyEvent.VK_D) {
+				bt32.setBackground(Color.red);
+			} else if (k == KeyEvent.VK_F) {
+				bt33.setBackground(Color.red);
+			} else if (k == KeyEvent.VK_G) {
+				bt34.setBackground(Color.red);
+			} else if (k == KeyEvent.VK_H) {
+				bt35.setBackground(Color.red);
+			} else if (k == KeyEvent.VK_J) {
+				bt36.setBackground(Color.red);
+			} else if (k == KeyEvent.VK_K) {
+				bt37.setBackground(Color.red);
+			} else if (k == KeyEvent.VK_L) {
+				bt38.setBackground(Color.red);
+			} else if (k == KeyEvent.VK_ENTER) {
+				bt41.setBackground(Color.red);
+			} else if (k == KeyEvent.VK_SHIFT) {
+				bt42.setBackground(Color.red);
+			} else if (k == KeyEvent.VK_Z) {
+				bt43.setBackground(Color.red);
+			} else if (k == KeyEvent.VK_X) {
+				bt44.setBackground(Color.red);
+			} else if (k == KeyEvent.VK_C) {
+				bt45.setBackground(Color.red);
+			} else if (k == KeyEvent.VK_V) {
+				bt46.setBackground(Color.red);
+			} else if (k == KeyEvent.VK_B) {
+				bt47.setBackground(Color.red);
+			} else if (k == KeyEvent.VK_N) {
+				bt48.setBackground(Color.red);
+			} else if (k == KeyEvent.VK_M) {
+				bt49.setBackground(Color.red);
+			} else if (k == KeyEvent.VK_SHIFT) {
+				bt53.setBackground(Color.red);
+			} else if (k == KeyEvent.VK_SPACE) {
+				bt58.setBackground(Color.red);
+			}
+		}
+
+		@Override
+		public void keyReleased(KeyEvent e) {
+			int k = e.getKeyCode();
+			if (k == KeyEvent.VK_Q) {
+				bt16.setBackground(null);
+			} else if (k == KeyEvent.VK_W) {
+				bt17.setBackground(null);
+			} else if (k == KeyEvent.VK_E) {
+				bt18.setBackground(null);
+			} else if (k == KeyEvent.VK_R) {
+				bt19.setBackground(null);
+			} else if (k == KeyEvent.VK_T) {
+				bt20.setBackground(null);
+			} else if (k == KeyEvent.VK_Y) {
+				bt21.setBackground(null);
+			} else if (k == KeyEvent.VK_U) {
+				bt22.setBackground(null);
+			} else if (k == KeyEvent.VK_I) {
+				bt23.setBackground(null);
+			} else if (k == KeyEvent.VK_O) {
+				bt24.setBackground(null);
+			} else if (k == KeyEvent.VK_P) {
+				bt25.setBackground(null);
+			} else if (k == KeyEvent.VK_A) {
+				bt30.setBackground(null);
+			} else if (k == KeyEvent.VK_S) {
+				bt31.setBackground(null);
+			} else if (k == KeyEvent.VK_D) {
+				bt32.setBackground(null);
+			} else if (k == KeyEvent.VK_F) {
+				bt33.setBackground(null);
+			} else if (k == KeyEvent.VK_G) {
+				bt34.setBackground(null);
+			} else if (k == KeyEvent.VK_H) {
+				bt35.setBackground(null);
+			} else if (k == KeyEvent.VK_J) {
+				bt36.setBackground(null);
+			} else if (k == KeyEvent.VK_K) {
+				bt37.setBackground(null);
+			} else if (k == KeyEvent.VK_L) {
+				bt38.setBackground(null);
+			} else if (k == KeyEvent.VK_ENTER) {
+				bt41.setBackground(null);
+			} else if (k == KeyEvent.VK_SHIFT) {
+				bt42.setBackground(null);
+			} else if (k == KeyEvent.VK_Z) {
+				bt43.setBackground(null);
+			} else if (k == KeyEvent.VK_X) {
+				bt44.setBackground(null);
+			} else if (k == KeyEvent.VK_C) {
+				bt45.setBackground(null);
+			} else if (k == KeyEvent.VK_V) {
+				bt46.setBackground(null);
+			} else if (k == KeyEvent.VK_B) {
+				bt47.setBackground(null);
+			} else if (k == KeyEvent.VK_N) {
+				bt48.setBackground(null);
+			} else if (k == KeyEvent.VK_M) {
+				bt49.setBackground(null);
+			} else if (k == KeyEvent.VK_SHIFT) {
+				bt53.setBackground(null);
+			} else if (k == KeyEvent.VK_SPACE) {
+				bt58.setBackground(null);
+			}
+		}
+	}
+
+}
+class JPanel005 extends JPanel { //문장 패널
+	private JAVA타자 win;
+
+	private ImageIcon b6image1 = new ImageIcon("Backbutton1.PNG");
+	private ImageIcon b6image2 = new ImageIcon("Backbutton2.PNG");
+	
+	JTextField tf1;
+	JTextArea ta1, ta2;
+	JLabel jb1, jb2, jb3, jb4, jb5;
+	ArrayList<String> a;
+
+	int county = 0, countx = 0, count = 0;
+
+	private long start;
+	private long end;
+	
+	String[] word = { "Until the day when the East Sea's waters and Mt. Baekdu are dry and worn away.",
+			"God protects and preserves us. Long live our nation!",
+			"Three thousand Li of splendid rivers and mountains, filled with Roses of Sharon.",
+			"Great Korean People, stay true to the Great Korean way.",
+			"The pine tree atop foremountain stands firmly unchanged under wind",
+    		"and frost as if wrapped in armour, as is our resilient spirit.",
+    		"Autumn sky is void and vast, high and cloudless.",
+    		"the bright moon is our heart, undivided and true.",
+    		"With this spirit and this mind, give all loyalty.",
+    		"in suffering or in joy, love the country."
+			};
+
+	public JPanel005(JAVA타자 win) {
+		this.win = win;
+		setLayout(null);
+
+		JPanel p4 = new JPanel();
+		p4.setLayout(null);
+
+		JButton b6 = new JButton(b6image1);
+		b6.setRolloverIcon(b6image2);
+		b6.setBounds(0, 0, 50, 50);
+		b6.setBorderPainted(false);
+		b6.setContentAreaFilled(false);
+		b6.setFocusPainted(false);
+		b6.addActionListener(new b9());
+
+		p4.add(b6);
+		p4.setBounds(0, 0, 1280, 720);
+		p4.setBackground(Color.WHITE);
+		add(p4);
+
+		JLabel resultText = new JLabel("Until the day when the East Sea's waters and Mt. Baekdu are dry and worn away.");
+
+		jb1 = new JLabel("Until the day when the East Sea's waters and Mt. Baekdu are dry and worn away.");
+		jb1.setFont(new Font("고딕", Font.BOLD, 20));
+		jb1.setBounds(270,150,800,200);
+		p4.add(jb1);
+		
+		jb2 = new JLabel("진행도:0%");
+		jb2.setFont(new Font("고딕", Font.BOLD, 20));
+		jb2.setBounds(350, 0, 200, 200);
+		p4.add(jb2);
+
+		jb3 = new JLabel("오타수:0개");
+		jb3.setFont(new Font("고딕", Font.BOLD, 20));
+		jb3.setBounds(550, 0, 200, 200);
+		p4.add(jb3);
+
+		jb4 = new JLabel("정확도:0%");
+		jb4.setFont(new Font("고딕", Font.BOLD, 20));
+		jb4.setBounds(750, 0, 200, 200);
+		p4.add(jb4);
+		
+		jb5 = new JLabel("애국가");
+		jb5.setFont(new Font("고딕", Font.BOLD, 40));
+		jb5.setBounds(550, 80, 200, 200);
+		p4.add(jb5);
+		
+		start = System.currentTimeMillis();
+		String[] word =  { "Until the day when the East Sea's waters and Mt. Baekdu are dry and worn away.",
+				"God protects and preserves us. Long live our nation!",
+				"Three thousand Li of splendid rivers and mountains, filled with Roses of Sharon.",
+				"Great Korean People, stay true to the Great Korean way.",
+				"The pine tree atop foremountain stands firmly unchanged under wind",
+	    		"and frost as if wrapped in armour, as is our resilient spirit.",
+	    		"Autumn sky is void and vast, high and cloudless.",
+	    		"the bright moon is our heart, undivided and true.",
+	    		"With this spirit and this mind, give all loyalty.",
+	    		"in suffering or in joy, love the country."
+				};
+		a = new ArrayList<String>();
+
+		for (int i = 0; i < word.length; i++)
+			a.add(word[i]);
+
+		tf1 = new JTextField();
+		tf1.setBounds(250, 300, 800, 30);
+		tf1.addKeyListener(new Check1());
+		tf1.setFocusable(true);
+		tf1.requestFocus();
+		p4.add(tf1);
+	
+		ta1 = new JTextArea("");
+		ta1.setBounds(525, 270, 230, 20);
+		p4.add(ta1);
+		
+		ta2 = new JTextArea("");
+		ta2.setBounds(605, 270, 230, 20);
+		p4.add(ta2);
+
+		JPanel p = new JPanel();
+		p.setLayout(null);
+		p.setBounds(284, 300, 712, 190);
+
+
+	}
+	class b9 implements ActionListener { // 버튼 키 눌리면 패널 1번 호출
+		public void actionPerformed(ActionEvent e) {
+			win.change("panel01");
+		}
+	}
+
+	class Check1 implements KeyListener {
+		@Override
+		public void keyPressed(KeyEvent e) {
+		}
+
+		@Override
+		public void keyReleased(KeyEvent e) {
+		if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+		county++; 
+		jb2.setText("진행도: " + Integer.toString((county))  + "0%");
+		if (county == 10) {
+		int result = JOptionPane.showConfirmDialog(null,"이어서 하시겠습니까?", "Confirm", JOptionPane.YES_NO_OPTION);
+		if(result == JOptionPane.YES_OPTION) {	
+		}else {
+		int result1 = JOptionPane.showConfirmDialog(null,"다시 하시겠습니까?", "Confirm", JOptionPane.YES_NO_OPTION);
+		if(result1 == JOptionPane.YES_OPTION) {	
+		 win.dispose();
+JAVA타자 win = new JAVA타자();
+win.jpanel001 = new JPanel001(win);
+		win.jpanel002 = new JPanel002(win);
+		win.jpanel003 = new JPanel003(win);
+		win.jpanel004 = new JPanel004(win);
+		win.jpanel005 = new JPanel005(win);
+
+		win.setTitle("JAVA타자연습");
+		win.add(win.jpanel001);
+			                        win.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		win.setSize(1280, 720);
+		win.setLocation(340, 150);
+		win.setResizable(true);
+		win.setVisible(true);
+
+		}else {
+			System.exit(0);
+						}
+					}
+				}
+	if (jb1.getText().equals(tf1.getText())) {
+	count++;
+		jb4.setText("정확도: " + Integer.toString((count)) + 0 + "%");
+
+		Random r = new Random();
+		end = System.currentTimeMillis();
+		
+		ta1.setText("실시간 타수: " + tf1.getText().length() / ((end - start) / 1000.0 / 60.0));
+		ta1.setVisible(true);
+					
+		jb1.setText(a.get(r.nextInt((a.size()))));
+		tf1.setText("");
+	} else {
+	countx++; // 틀린값 저장
+	jb3.setText("오타수: " + Integer.toString((countx)) + "개");
+					
+	ta2.setText("틀렸습니다.");
+	ta1.setVisible(false);
+	tf1.setText("");
+				}
+
+			}
+		}
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+		}
+	}
+}
+
+public class JAVA타자 extends JFrame {// 패널 전환 
+
+	public JPanel001 jpanel001 = null;
+	public JPanel002 jpanel002 = null;
+	public JPanel003 jpanel003 = null;
+	public JPanel004 jpanel004 = null;
+	public JPanel005 jpanel005 = null;
+
+	public void change(String panelName) { // 패널 전환 이름에 따라 패널 전환
+		if (panelName.equals("panel01")) {
+			getContentPane().removeAll();
+			getContentPane().add(jpanel001);
+			revalidate();
+			repaint();
+		} else if (panelName.equals("panel02")) {
+			getContentPane().removeAll();
+			getContentPane().add(jpanel002);
+			revalidate();
+			repaint();
+		} else if (panelName.equals("panel03")) {
+			getContentPane().removeAll();
+			getContentPane().add(jpanel003);
+			revalidate();
+			repaint();
+		} else if (panelName.equals("panel04")) {
+			getContentPane().removeAll();
+			getContentPane().add(jpanel004);
+			revalidate();
+			repaint();
+		} else if (panelName.equals("panel05")) {
+			getContentPane().removeAll();
+			getContentPane().add(jpanel005);
+			revalidate();
+			repaint();
+		}
+	}
+
+	public static void main(String[] arge) {
+		JAVA타자 win = new JAVA타자();
+
+		win.jpanel001 = new JPanel001(win);
+		win.jpanel002 = new JPanel002(win);
+		win.jpanel003 = new JPanel003(win);
+		win.jpanel004 = new JPanel004(win);
+		win.jpanel005 = new JPanel005(win);
+		win.setTitle("JAVA타자연습");
+		win.add(win.jpanel001);
+		win.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		win.setSize(1280, 720);
+		win.setLocation(340, 150);
+		win.setResizable(true);
+		win.setVisible(true);
+	}
+
+}
